@@ -2,7 +2,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useUser } from '@/shared/api/users'
 import { applyUserDraft, getDefaultAvatar } from '@/entities/user/utils'
 import { UserForm } from '@/features/user-form/UserForm'
-import { useUserStore } from '@/store/userStore'
+import { useEditedUsers } from '@/store/userStore'
 import arrowLeftIcon from '@/assets/arrow-left.svg'
 import { Loader } from '@/shared/ui'
 import './edit-user.scss'
@@ -10,7 +10,7 @@ import './edit-user.scss'
 export const EditUserPage = () => {
     const { id } = useParams()
     const navigate = useNavigate()
-    const { editedUsers } = useUserStore()
+    const editedUsers = useEditedUsers()
     const { data, isLoading, isError, refetch, isFetching } = useUser(id!)
 
     if (isLoading) return <Loader variant="edit" />
@@ -63,18 +63,20 @@ export const EditUserPage = () => {
                             alt={preparedUser.name}
                         />
 
-                        <nav className="edit-user-page__menu">
-                            <div className="edit-user-page__menu-item edit-user-page__menu-item--active">
-                                Данные профиля
-                            </div>
-                            <div className="edit-user-page__menu-item">Рабочее пространство</div>
-                            <div className="edit-user-page__menu-item">Приватность</div>
-                            <div className="edit-user-page__menu-item">Безопасность</div>
+                        <nav className="edit-user-page__menu" aria-label="Разделы профиля">
+                            <ul className="edit-user-page__menu-list">
+                                <li className="edit-user-page__menu-item edit-user-page__menu-item--active" aria-current="page">
+                                    Данные профиля
+                                </li>
+                                <li className="edit-user-page__menu-item">Рабочее пространство</li>
+                                <li className="edit-user-page__menu-item">Приватность</li>
+                                <li className="edit-user-page__menu-item">Безопасность</li>
+                            </ul>
                         </nav>
                     </aside>
 
                     <section className="edit-user-page__content">
-                        <div className="edit-user-page__title">Данные профиля</div>
+                        <h1 className="edit-user-page__title">Данные профиля</h1>
                         <div className="edit-user-page__divider" />
 
                         <UserForm user={preparedUser} />

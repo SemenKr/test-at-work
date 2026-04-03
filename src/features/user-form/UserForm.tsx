@@ -6,7 +6,7 @@ import { userSchema, UserFormValues } from '@/entities/user/schema'
 import { User } from '@/entities/user/types'
 import { useId, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useUserStore } from '@/store/userStore'
+import { useSaveUser } from '@/store/userStore'
 import './user-form.scss'
 
 type Props = {
@@ -18,7 +18,7 @@ export const UserForm = ({ user }: Props) => {
     const formId = useId()
     const [open, setOpen] = useState(false)
     const navigate = useNavigate()
-    const { saveUser } = useUserStore()
+    const saveUser = useSaveUser()
     const fields: Array<{
         name: keyof UserFormValues
         label: string

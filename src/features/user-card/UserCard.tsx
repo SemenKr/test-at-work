@@ -1,7 +1,7 @@
 import { Dropdown } from '@/shared/ui'
 import { getDefaultAvatar } from '@/entities/user/utils'
 import { User } from '@/entities/user/types'
-import { useUserStore } from '@/store/userStore'
+import { useArchiveUser, useHideUser, useUnarchiveUser } from '@/store/userStore'
 import { useNavigate } from 'react-router-dom'
 import { useId, useRef } from 'react'
 import './user-card.scss'
@@ -25,7 +25,9 @@ export const UserCard = ({
     const menuButtonRef = useRef<HTMLButtonElement>(null)
     const menuId = useId()
     const menuButtonId = useId()
-    const { archiveUser, unarchiveUser, hideUser } = useUserStore()
+    const archiveUser = useArchiveUser()
+    const unarchiveUser = useUnarchiveUser()
+    const hideUser = useHideUser()
     const photoUrl = user.avatar ?? getDefaultAvatar(user.id)
 
     const handleEdit = () => {

@@ -1,6 +1,6 @@
 import { useUsers } from '@/shared/api/users'
 import { applyUserDraft } from '@/entities/user/utils'
-import { useUserStore } from '@/store/userStore'
+import { useArchivedUserIds, useEditedUsers, useHiddenUserIds } from '@/store/userStore'
 import { UserCard } from '@/features/user-card/UserCard'
 import { useState } from 'react'
 import { Loader } from '@/shared/ui'
@@ -8,7 +8,9 @@ import './users-page.scss'
 
 export const UsersPage = () => {
     const { data, isLoading, isError, refetch, isFetching } = useUsers()
-    const { archived, hidden, editedUsers } = useUserStore()
+    const archived = useArchivedUserIds()
+    const hidden = useHiddenUserIds()
+    const editedUsers = useEditedUsers()
     const [openMenuUserId, setOpenMenuUserId] = useState<number | null>(null)
 
     if (isLoading) return <Loader variant="users" />
@@ -48,9 +50,9 @@ export const UsersPage = () => {
         <section className="users-page">
             <div className="users-page__container">
                 <section className="users-page__section" aria-labelledby="active-users-title">
-                    <div className="users-page__section-title" id="active-users-title">
+                    <h1 className="users-page__section-title" id="active-users-title">
                         Активные
-                    </div>
+                    </h1>
                     <div className="users-page__divider" />
 
                     {activeUsers?.length ? (
@@ -80,9 +82,9 @@ export const UsersPage = () => {
 
                 {Boolean(archivedUsers?.length) && (
                     <section className="users-page__section" aria-labelledby="archived-users-title">
-                        <div className="users-page__section-title" id="archived-users-title">
+                        <h2 className="users-page__section-title" id="archived-users-title">
                             Архив
-                        </div>
+                        </h2>
                         <div className="users-page__divider" />
 
                         <div className="users-page__grid">
