@@ -15,7 +15,7 @@
 }
 
 .app-shell__container {
-  max-width: 1160px;
+  width: min(calc(100% - 32px), 1160px);
   margin: 0 auto;
   padding: 10px 0 9px;
   display: flex;
@@ -109,7 +109,7 @@
 
 @media (max-width: 900px) {
   .app-shell__container {
-    padding: 8px 16px 7px;
+    padding: 8px 0 7px;
   }
 
   .app-shell__actions {
