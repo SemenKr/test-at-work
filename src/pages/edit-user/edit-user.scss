@@ -1,0 +1,149 @@
+@use '@styles/variables' as *;
+
+.edit-user-page {
+  background: $bg;
+  min-height: 100vh;
+  padding: 24px 40px 48px;
+}
+
+.edit-user-page__container {
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+.edit-user-page__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  color: $text-secondary;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.edit-user-page__back-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.edit-user-page__back:hover {
+  color: $accent;
+}
+
+.edit-user-page__wrapper {
+  display: grid;
+  grid-template-columns: 360px minmax(0, 1fr);
+  gap: 28px;
+  align-items: stretch;
+}
+
+.edit-user-page__sidebar {
+  height: 100%;
+  padding: 40px;
+  border-radius: 18px;
+  background: $card;
+  box-shadow: $shadow-soft;
+}
+
+.edit-user-page__avatar {
+  width: 280px;
+  height: 485px;
+  object-fit: cover;
+  border-radius: 8px;
+  object-position: center;
+  margin-bottom: 14px;
+}
+
+.edit-user-page__menu-item {
+  padding: 16px 0 14px;
+  border-bottom: 1px solid $border;
+  color: $text-secondary;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  transition: color 0.2s ease;
+}
+
+.edit-user-page__menu-item--active {
+  color: $text;
+  font-weight: 600;
+}
+
+.edit-user-page__menu-item:hover {
+  color: $text;
+}
+
+.edit-user-page__content {
+  min-width: 0;
+  max-width: 100%;
+  height: 100%;
+  padding: 28px 36px 26px;
+  border-radius: 18px;
+  background: $card;
+  box-shadow: $shadow-soft;
+}
+
+.edit-user-page__title {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.edit-user-page__divider {
+  height: 1px;
+  background: $border;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 900px) {
+  .edit-user-page {
+    padding: 12px 0 24px;
+  }
+
+  .edit-user-page__container {
+    padding: 0 16px;
+  }
+
+  .edit-user-page__wrapper {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    align-items: start;
+  }
+
+  .edit-user-page__sidebar {
+    height: auto;
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  .edit-user-page__content {
+    height: auto;
+    padding: 16px 14px 18px;
+    border-radius: 14px;
+  }
+
+  .edit-user-page__avatar {
+    width: 100%;
+    max-width: 287px;
+    height: 187px;
+    border-radius: 8px;
+  }
+
+  .edit-user-page__back {
+    margin-bottom: 14px;
+    font-size: 13px;
+  }
+
+  .edit-user-page__title {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+
+  .edit-user-page__divider {
+    margin-bottom: 14px;
+  }
+}

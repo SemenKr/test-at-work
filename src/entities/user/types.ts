@@ -12,6 +12,7 @@ export type User = {
     username: string
     email: string
     phone: string
+    avatar?: string
     address: Address
     company: Company
 }

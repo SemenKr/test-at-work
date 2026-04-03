@@ -1,0 +1,54 @@
+@use '@styles/variables' as *;
+
+.dropdown {
+  position: absolute;
+  top: 48px;
+  right: 10px;
+  min-width: 188px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  border: 1px solid $border;
+  border-radius: 16px;
+  background: $surface;
+  box-shadow: $shadow-soft;
+  z-index: 1000;
+}
+
+.dropdown__item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 40px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: $text-secondary;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.dropdown__item:hover {
+  background: rgba(42, 144, 188, 0.08);
+  color: $accent;
+  transform: translateX(2px);
+}
+
+@media (max-width: 900px) {
+  .dropdown {
+    top: 132px;
+    right: 8px;
+    min-width: 160px;
+  }
+
+  .dropdown__item {
+    min-height: 36px;
+    font-size: 13px;
+  }
+}

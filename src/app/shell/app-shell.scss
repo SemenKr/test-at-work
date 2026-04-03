@@ -1,0 +1,135 @@
+@use '@styles/variables' as *;
+
+.app-shell {
+  min-height: 100vh;
+  background: $bg;
+}
+
+.app-shell__header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.94);
+  border-bottom: 1px solid rgba(218, 218, 218, 0.65);
+  backdrop-filter: blur(12px);
+}
+
+.app-shell__container {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 10px 0 9px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.app-shell__brand {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  text-decoration: none;
+}
+
+.app-shell__logo {
+  width: 88px;
+  height: 20px;
+  display: block;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.app-shell__actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.app-shell__icon-button {
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease, opacity 0.2s ease;
+}
+
+.app-shell__icon-button:hover {
+  background: $bg;
+  opacity: 0.8;
+}
+
+.app-shell__icon {
+  display: block;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.app-shell__profile {
+  margin-left: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.app-shell__avatar,
+.app-shell__avatar-image {
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+}
+
+.app-shell__avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #d4c2a7 0%, #7fb5d9 100%);
+  color: $card;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.app-shell__avatar-image {
+  object-fit: cover;
+  display: block;
+}
+
+.app-shell__profile-name {
+  color: $text-secondary;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.app-shell__content {
+  min-height: calc(100vh - 53px);
+}
+
+@media (max-width: 900px) {
+  .app-shell__container {
+    padding: 8px 16px 7px;
+  }
+
+  .app-shell__actions {
+    gap: 2px;
+  }
+
+  .app-shell__icon-button,
+  .app-shell__profile-name {
+    display: none;
+  }
+
+  .app-shell__profile {
+    margin-left: 0;
+  }
+
+  .app-shell__logo {
+    width: 84px;
+  }
+
+  .app-shell__content {
+    min-height: calc(100vh - 41px);
+  }
+}

@@ -1,3 +1,7 @@
+@use '@styles/variables' as *;
+@use '@styles/layout';
+@use '@styles/grid';
+
 * {
   margin: 0;
   padding: 0;
@@ -5,5 +9,24 @@
 }
 
 body {
-  font-family: sans-serif;
+  background: $bg;
+  color: $text;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  border: 0;
+  background: transparent;
+}
+
+#root {
+  min-height: 100vh;
 }
