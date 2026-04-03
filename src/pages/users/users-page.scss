@@ -1,0 +1,180 @@
+@use '@styles/variables' as *;
+
+.users-page {
+  min-height: 100vh;
+  padding: 28px 40px 48px;
+  background: $bg;
+}
+
+.users-page__container {
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+.users-page__section + .users-page__section {
+  margin-top: 40px;
+}
+
+.users-page__section-title {
+  margin-bottom: 16px;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.users-page__divider {
+  height: 1px;
+  margin-bottom: 24px;
+  background: $border;
+}
+
+.users-page__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px 28px;
+  align-items: start;
+}
+
+.users-page__grid > .user-card:only-child {
+  max-width: 360px;
+}
+
+.users-page__grid > .user-card:nth-child(2) {
+  animation-delay: 0.05s;
+}
+
+.users-page__grid > .user-card:nth-child(3) {
+  animation-delay: 0.1s;
+}
+
+.users-page__grid > .user-card:nth-child(4) {
+  animation-delay: 0.15s;
+}
+
+.users-page__grid > .user-card:nth-child(5) {
+  animation-delay: 0.2s;
+}
+
+.users-page__grid > .user-card:nth-child(6) {
+  animation-delay: 0.25s;
+}
+
+.users-page__empty,
+.users-page__status {
+  max-width: 440px;
+  padding: 24px;
+  border: 1px solid rgba(218, 218, 218, 0.4);
+  border-radius: 18px;
+  background: $card;
+  box-shadow: $shadow-soft;
+}
+
+.users-page__empty-title,
+.users-page__status-title {
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: $text;
+}
+
+.users-page__empty-text,
+.users-page__status-text {
+  color: $text-secondary;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.users-page__status-action {
+  margin-top: 18px;
+  min-height: 40px;
+  padding: 0 20px;
+  border: 1px solid $text;
+  border-radius: 999px;
+  background: $text;
+  color: $card;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.users-page__status-action:hover:not(:disabled) {
+  background: $card;
+  color: $text;
+}
+
+.users-page__status-action:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.users-page__status-action:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+@media (max-width: 1080px) {
+  .users-page__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+}
+
+@media (max-width: 900px) {
+  .users-page {
+    padding: 10px 0 24px;
+  }
+
+  .users-page__container {
+    padding: 0 16px;
+  }
+
+  .users-page__section + .users-page__section {
+    margin-top: 28px;
+  }
+
+  .users-page__section-title {
+    margin-bottom: 12px;
+    font-size: 18px;
+  }
+
+  .users-page__divider {
+    margin-bottom: 20px;
+  }
+
+  .users-page__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 12px;
+  }
+
+  .users-page__grid > .user-card:only-child {
+    max-width: 162px;
+  }
+
+  .users-page__empty,
+  .users-page__status {
+    padding: 18px 16px;
+    border-radius: 14px;
+  }
+
+  .users-page__empty-title,
+  .users-page__status-title {
+    font-size: 18px;
+  }
+
+  .users-page__empty-text,
+  .users-page__status-text {
+    font-size: 14px;
+  }
+
+  .users-page__status-action {
+    width: 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  .users-page__grid {
+    grid-template-columns: 1fr;
+  }
+}

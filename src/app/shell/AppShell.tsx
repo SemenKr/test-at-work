@@ -28,12 +28,12 @@ export const AppShell = () => {
           </Link>
 
           <div className="app-shell__actions">
-            <button className="app-shell__icon-button" type="button" aria-label="Favorites">
+            <span className="app-shell__icon-badge" aria-hidden="true">
               <img className="app-shell__icon" src={favoriteIcon} alt="" aria-hidden="true" />
-            </button>
-            <button className="app-shell__icon-button" type="button" aria-label="Notifications">
+            </span>
+            <span className="app-shell__icon-badge" aria-hidden="true">
               <img className="app-shell__icon" src={notificationIcon} alt="" aria-hidden="true" />
-            </button>
+            </span>
             <div className="app-shell__profile">
               {headerUser ? (
                 <img

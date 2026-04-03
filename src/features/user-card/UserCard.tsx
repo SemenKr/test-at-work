@@ -3,6 +3,7 @@ import { getDefaultAvatar } from '@/entities/user/utils'
 import { User } from '@/entities/user/types'
 import { useUserStore } from '@/store/userStore'
 import { useNavigate } from 'react-router-dom'
+import { useId, useRef } from 'react'
 import './user-card.scss'
 
 type Props = {
@@ -21,6 +22,9 @@ export const UserCard = ({
     onCloseMenu,
 }: Props) => {
     const navigate = useNavigate()
+    const menuButtonRef = useRef<HTMLButtonElement>(null)
+    const menuId = useId()
+    const menuButtonId = useId()
     const { archiveUser, unarchiveUser, hideUser } = useUserStore()
     const photoUrl = user.avatar ?? getDefaultAvatar(user.id)
 
@@ -73,18 +77,28 @@ export const UserCard = ({
                     </div>
 
                     <button
+                        id={menuButtonId}
+                        ref={menuButtonRef}
                         className="user-card__menu"
                         type="button"
-                        aria-label="Open actions"
+                        aria-label={`Открыть действия для ${user.username}`}
+                        aria-haspopup="menu"
                         aria-expanded={isMenuOpen}
+                        aria-controls={isMenuOpen ? menuId : undefined}
                         onClick={(e) => {
                             e.stopPropagation()
                             onToggleMenu(user.id)
                         }}
+                        onKeyDown={(event) => {
+                            if (event.key === 'ArrowDown' || event.key === 'Enter' || event.key === ' ') {
+                                event.preventDefault()
+                                onToggleMenu(user.id)
+                            }
+                        }}
                     >
-                        <span />
-                        <span />
-                        <span />
+                        <span aria-hidden="true" />
+                        <span aria-hidden="true" />
+                        <span aria-hidden="true" />
                     </button>
                 </div>
 
@@ -93,23 +107,29 @@ export const UserCard = ({
                 </div>
             </div>
 
-            <Dropdown open={isMenuOpen} onClose={onCloseMenu}>
+            <Dropdown
+                open={isMenuOpen}
+                menuId={menuId}
+                labelledBy={menuButtonId}
+                onClose={onCloseMenu}
+                triggerRef={menuButtonRef}
+            >
                 {!isArchived ? (
                     <>
-                        <button className="dropdown__item" type="button" onClick={handleEdit}>
+                        <button className="dropdown__item" role="menuitem" type="button" onClick={handleEdit}>
                             Редактировать
                         </button>
 
-                        <button className="dropdown__item" type="button" onClick={handleArchive}>
+                        <button className="dropdown__item" role="menuitem" type="button" onClick={handleArchive}>
                             Архивировать
                         </button>
 
-                        <button className="dropdown__item" type="button" onClick={handleHide}>
+                        <button className="dropdown__item" role="menuitem" type="button" onClick={handleHide}>
                             Скрыть
                         </button>
                     </>
                 ) : (
-                    <button className="dropdown__item" type="button" onClick={handleRestore}>
+                    <button className="dropdown__item" role="menuitem" type="button" onClick={handleRestore}>
                         Активировать
                     </button>
                 )}

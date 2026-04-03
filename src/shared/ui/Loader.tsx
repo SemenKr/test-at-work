@@ -11,8 +11,9 @@ const formFields = Array.from({ length: 6 }, (_, index) => index)
 export const Loader = ({ variant = 'users' }: LoaderProps) => {
     if (variant === 'edit') {
         return (
-            <div className="loader loader--edit">
-                <div className="loader__edit-container">
+            <div className="loader loader--edit" role="status" aria-live="polite" aria-busy="true">
+                <span className="loader__sr-only">Загрузка страницы редактирования пользователя</span>
+                <div className="loader__edit-container" aria-hidden="true">
                     <div className="loader__back" />
 
                     <div className="loader__edit-layout">
@@ -48,13 +49,14 @@ export const Loader = ({ variant = 'users' }: LoaderProps) => {
     }
 
     return (
-        <div className="loader loader--users">
-            <div className="container">
-                <div className="section">
+        <div className="loader loader--users" role="status" aria-live="polite" aria-busy="true">
+            <span className="loader__sr-only">Загрузка списка пользователей</span>
+            <div className="loader__users-container" aria-hidden="true">
+                <div className="loader__users-section">
                     <div className="loader__section-title" />
-                    <div className="divider" />
+                    <div className="loader__users-divider" />
 
-                    <div className="grid">
+                    <div className="loader__users-grid">
                         {userCards.map((card) => (
                             <div className="loader__user-card" key={card}>
                                 <div className="loader__user-image" />

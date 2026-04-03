@@ -45,20 +45,14 @@
   gap: 6px;
 }
 
-.app-shell__icon-button {
+.app-shell__icon-badge {
   width: 30px;
   height: 30px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  cursor: pointer;
-  transition: background 0.2s ease, opacity 0.2s ease;
-}
-
-.app-shell__icon-button:hover {
-  background: $bg;
-  opacity: 0.8;
+  background: transparent;
 }
 
 .app-shell__icon {
@@ -116,7 +110,7 @@
     gap: 2px;
   }
 
-  .app-shell__icon-button,
+  .app-shell__icon-badge,
   .app-shell__profile-name {
     display: none;
   }

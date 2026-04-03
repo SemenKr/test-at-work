@@ -141,30 +141,6 @@
   filter: grayscale(1);
 }
 
-.grid > .user-card:only-child {
-  max-width: 360px;
-}
-
-.grid > .user-card:nth-child(2) {
-  animation-delay: 0.05s;
-}
-
-.grid > .user-card:nth-child(3) {
-  animation-delay: 0.1s;
-}
-
-.grid > .user-card:nth-child(4) {
-  animation-delay: 0.15s;
-}
-
-.grid > .user-card:nth-child(5) {
-  animation-delay: 0.2s;
-}
-
-.grid > .user-card:nth-child(6) {
-  animation-delay: 0.25s;
-}
-
 .user-card:hover .user-card__avatar,
 .user-card--menu-open .user-card__avatar {
   transform: scale(1.035);
@@ -214,10 +190,6 @@
   .user-card__menu {
     width: 20px;
     height: 20px;
-  }
-
-  .grid > .user-card:only-child {
-    max-width: 162px;
   }
 }
 

@@ -37,6 +37,11 @@
   cursor: pointer;
 }
 
+.success-modal__close:focus-visible {
+  outline: 2px solid rgba(42, 144, 188, 0.45);
+  outline-offset: 2px;
+}
+
 .success-modal__close-icon {
   width: 12px;
   height: 12px;

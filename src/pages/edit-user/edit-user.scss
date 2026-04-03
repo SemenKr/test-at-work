@@ -99,6 +99,72 @@
   margin-bottom: 16px;
 }
 
+.edit-user-page__state {
+  max-width: 480px;
+  padding: 28px;
+  border: 1px solid rgba(218, 218, 218, 0.4);
+  border-radius: 18px;
+  background: $card;
+  box-shadow: $shadow-soft;
+}
+
+.edit-user-page__state-title {
+  margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.edit-user-page__state-text {
+  color: $text-secondary;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.edit-user-page__state-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.edit-user-page__state-button {
+  min-height: 40px;
+  padding: 0 20px;
+  border: 1px solid $text;
+  border-radius: 999px;
+  background: $text;
+  color: $card;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.edit-user-page__state-button:hover:not(:disabled) {
+  background: $card;
+  color: $text;
+}
+
+.edit-user-page__state-button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.edit-user-page__state-button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.edit-user-page__state-button--secondary {
+  background: transparent;
+  color: $text;
+}
+
+.edit-user-page__state-button--secondary:hover:not(:disabled) {
+  background: $text;
+  color: $card;
+}
+
 @media (max-width: 900px) {
   .edit-user-page {
     padding: 12px 0 24px;
@@ -145,5 +211,22 @@
 
   .edit-user-page__divider {
     margin-bottom: 14px;
+  }
+
+  .edit-user-page__state {
+    padding: 20px 16px;
+    border-radius: 14px;
+  }
+
+  .edit-user-page__state-title {
+    font-size: 20px;
+  }
+
+  .edit-user-page__state-actions {
+    flex-direction: column;
+  }
+
+  .edit-user-page__state-button {
+    width: 100%;
   }
 }

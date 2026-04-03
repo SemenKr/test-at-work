@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { userSchema, UserFormValues } from '@/entities/user/schema'
 import { User } from '@/entities/user/types'
-import { useState } from 'react'
+import { useId, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useUserStore } from '@/store/userStore'
 import './user-form.scss'
@@ -15,20 +15,23 @@ type Props = {
 
 export const UserForm = ({ user }: Props) => {
     const initialDraft = toUserDraft(user)
+    const formId = useId()
     const [open, setOpen] = useState(false)
     const navigate = useNavigate()
     const { saveUser } = useUserStore()
     const fields: Array<{
         name: keyof UserFormValues
         label: string
-        type?: 'text' | 'email'
+        type?: 'text' | 'email' | 'tel'
+        autoComplete?: string
+        inputMode?: 'text' | 'email' | 'tel'
     }> = [
-        { name: 'name', label: 'Имя' },
-        { name: 'username', label: 'Никнейм' },
-        { name: 'email', label: 'Почта', type: 'email' },
-        { name: 'city', label: 'Город' },
-        { name: 'phone', label: 'Телефон' },
-        { name: 'company', label: 'Название компании' },
+        { name: 'name', label: 'Имя', autoComplete: 'name' },
+        { name: 'username', label: 'Никнейм', autoComplete: 'username' },
+        { name: 'email', label: 'Почта', type: 'email', autoComplete: 'email', inputMode: 'email' },
+        { name: 'city', label: 'Город', autoComplete: 'address-level2' },
+        { name: 'phone', label: 'Телефон', type: 'tel', autoComplete: 'tel', inputMode: 'tel' },
+        { name: 'company', label: 'Название компании', autoComplete: 'organization' },
     ]
 
     const {
@@ -43,7 +46,7 @@ export const UserForm = ({ user }: Props) => {
     const onSubmit = (data: UserFormValues) => {
         saveUser(user.id, {
             ...data,
-            phone: data.phone.replace(/\D/g, ''),
+            phone: data.phone.trim(),
         })
         setOpen(true)
     }
@@ -60,17 +63,28 @@ export const UserForm = ({ user }: Props) => {
 
                 <div className="user-form__grid">
                     {fields.map((field) => (
-                        <label className="user-form__field" key={field.name}>
-                            <span className="user-form__label">{field.label}</span>
+                        <div className="user-form__field" key={field.name}>
+                            <label className="user-form__label" htmlFor={`${formId}-${field.name}`}>
+                                {field.label}
+                            </label>
                             <input
+                                id={`${formId}-${field.name}`}
                                 className={`user-form__input ${errors[field.name] ? 'user-form__input--error' : ''}`}
                                 type={field.type ?? 'text'}
+                                autoComplete={field.autoComplete}
+                                inputMode={field.inputMode}
+                                aria-invalid={errors[field.name] ? 'true' : 'false'}
+                                aria-describedby={errors[field.name] ? `${formId}-${field.name}-error` : undefined}
                                 {...register(field.name)}
                             />
-                            <span className="user-form__message">
+                            <span
+                                id={`${formId}-${field.name}-error`}
+                                className="user-form__message"
+                                role={errors[field.name] ? 'alert' : undefined}
+                            >
                                 {errors[field.name]?.message ?? ''}
                             </span>
-                        </label>
+                        </div>
                     ))}
                 </div>
 

@@ -11,10 +11,40 @@ export const EditUserPage = () => {
     const { id } = useParams()
     const navigate = useNavigate()
     const { editedUsers } = useUserStore()
-    const { data, isLoading } = useUser(id!)
+    const { data, isLoading, isError, refetch, isFetching } = useUser(id!)
 
     if (isLoading) return <Loader variant="edit" />
-    if (!data) return <div>Error</div>
+    if (isError || !data) {
+        return (
+            <section className="edit-user-page">
+                <div className="edit-user-page__container">
+                    <div className="edit-user-page__state" role="alert">
+                        <h1 className="edit-user-page__state-title">Не удалось открыть профиль</h1>
+                        <p className="edit-user-page__state-text">
+                            Данные пользователя сейчас недоступны. Повтори попытку или вернись к списку.
+                        </p>
+                        <div className="edit-user-page__state-actions">
+                            <button
+                                className="edit-user-page__state-button"
+                                type="button"
+                                onClick={() => void refetch()}
+                                disabled={isFetching}
+                            >
+                                Повторить загрузку
+                            </button>
+                            <button
+                                className="edit-user-page__state-button edit-user-page__state-button--secondary"
+                                type="button"
+                                onClick={() => navigate('/')}
+                            >
+                                На главную
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        )
+    }
     const preparedUser = applyUserDraft(data, editedUsers[data.id])
 
     return (
