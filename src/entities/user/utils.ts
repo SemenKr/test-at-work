@@ -10,6 +10,8 @@ export type UserDraft = {
   avatar: string
 }
 
+export const VISIBLE_USERS_LIMIT = 6
+
 export const getDefaultAvatar = (id: number) => `https://i.pravatar.cc/400?img=${id}`
 
 export const toUserDraft = (user: User): UserDraft => ({
@@ -38,3 +40,12 @@ export const applyUserDraft = (user: User, draft?: Partial<UserDraft>): User => 
     name: draft?.company ?? user.company.name,
   },
 })
+
+export const getActiveUsers = (users: User[], archivedIds: number[], hiddenIds: number[]) =>
+  users.filter((user) => !archivedIds.includes(user.id) && !hiddenIds.includes(user.id))
+
+export const getVisibleActiveUsers = (users: User[], archivedIds: number[], hiddenIds: number[]) =>
+  getActiveUsers(users, archivedIds, hiddenIds).slice(0, VISIBLE_USERS_LIMIT)
+
+export const getArchivedUsers = (users: User[], archivedIds: number[]) =>
+  users.filter((user) => archivedIds.includes(user.id))

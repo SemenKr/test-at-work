@@ -1,5 +1,5 @@
 import { useUsers } from '@/shared/api/users'
-import { applyUserDraft } from '@/entities/user/utils'
+import { applyUserDraft, getArchivedUsers, getVisibleActiveUsers } from '@/entities/user/utils'
 import { useArchivedUserIds, useEditedUsers, useHiddenUserIds } from '@/store/userStore'
 import { UserCard } from '@/features/user-card/UserCard'
 import { useState } from 'react'
@@ -36,15 +36,10 @@ export const UsersPage = () => {
             </section>
         )
     }
-    const preparedUsers = data?.map((user) => applyUserDraft(user, editedUsers[user.id]))
+    const preparedUsers = data?.map((user) => applyUserDraft(user, editedUsers[user.id])) ?? []
 
-    const activeUsers = preparedUsers?.filter(
-        (u) => !archived.includes(u.id) && !hidden.includes(u.id)
-    )
-
-    const archivedUsers = preparedUsers?.filter((u) =>
-        archived.includes(u.id)
-    )
+    const activeUsers = getVisibleActiveUsers(preparedUsers, archived, hidden)
+    const archivedUsers = getArchivedUsers(preparedUsers, archived)
 
     return (
         <section className="users-page">
@@ -55,7 +50,7 @@ export const UsersPage = () => {
                     </h1>
                     <div className="users-page__divider" />
 
-                    {activeUsers?.length ? (
+                    {activeUsers.length ? (
                         <div className="users-page__grid">
                             {activeUsers.map((user) => (
                                 <UserCard
@@ -80,7 +75,7 @@ export const UsersPage = () => {
                     )}
                 </section>
 
-                {Boolean(archivedUsers?.length) && (
+                {Boolean(archivedUsers.length) && (
                     <section className="users-page__section" aria-labelledby="archived-users-title">
                         <h2 className="users-page__section-title" id="archived-users-title">
                             Архив
@@ -88,7 +83,7 @@ export const UsersPage = () => {
                         <div className="users-page__divider" />
 
                         <div className="users-page__grid">
-                            {archivedUsers?.map((user) => (
+                            {archivedUsers.map((user) => (
                                 <UserCard
                                     key={user.id}
                                     user={user}

@@ -17,7 +17,7 @@
 }
 
 .loader--users {
-  min-height: 100vh;
+  flex: 1 0 auto;
 }
 
 .loader__users-container {
@@ -156,7 +156,7 @@
 }
 
 .loader--edit {
-  min-height: calc(100vh - 53px);
+  flex: 1 0 auto;
   padding: 24px 40px 48px;
 }
 

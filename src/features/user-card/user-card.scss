@@ -118,16 +118,20 @@
   color: $text;
   cursor: pointer;
   transition:
-    background 0.24s ease,
+    color 0.24s ease,
     border-color 0.24s ease,
-    transform 0.24s ease,
-    box-shadow 0.24s ease;
+    transform 0.24s ease;
 }
 
 .user-card__menu:hover {
-  background: rgba(42, 144, 188, 0.1);
+  color: $accent;
   transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(42, 144, 188, 0.12);
+}
+
+.user-card__menu:focus-visible {
+  color: $accent;
+  outline: 2px solid rgba(42, 144, 188, 0.35);
+  outline-offset: 2px;
 }
 
 .user-card__menu span {

@@ -1,6 +1,8 @@
 @use '@styles/variables' as *;
 
 .app-shell {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
   background: $bg;
 }
@@ -98,7 +100,70 @@
 }
 
 .app-shell__content {
-  min-height: calc(100vh - 53px);
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-shell__footer {
+  flex-shrink: 0;
+  border-top: 1px solid rgba(218, 218, 218, 0.65);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.app-shell__container--footer {
+  padding: 16px 0 18px;
+  align-items: center;
+}
+
+.app-shell__footer-copy {
+  color: $text-secondary;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.app-shell__footer-links {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+}
+
+.app-shell__footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: $text;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+  text-decoration: none;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.app-shell__footer-link-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+  flex-shrink: 0;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.app-shell__footer-link:hover {
+  color: $accent;
+}
+
+.app-shell__footer-link:hover .app-shell__footer-link-icon,
+.app-shell__footer-link:focus-visible .app-shell__footer-link-icon {
+  transform: translateY(-1px);
+}
+
+.app-shell__footer-link:focus-visible {
+  outline: 2px solid rgba(42, 144, 188, 0.35);
+  outline-offset: 3px;
+  border-radius: 6px;
 }
 
 @media (max-width: 900px) {
@@ -123,7 +188,15 @@
     width: 84px;
   }
 
-  .app-shell__content {
-    min-height: calc(100vh - 41px);
+  .app-shell__container--footer {
+    padding: 14px 0 16px;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .app-shell__footer-links {
+    justify-content: flex-start;
+    gap: 12px;
   }
 }
