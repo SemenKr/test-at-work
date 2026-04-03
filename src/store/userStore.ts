@@ -10,14 +10,19 @@ type UserStore = {
     unarchiveUser: (id: number) => void
     hideUser: (id: number) => void
     saveUser: (id: number, data: UserDraft) => void
+    resetState: () => void
+}
+
+const INITIAL_USER_STATE = {
+    archived: [] as number[],
+    hidden: [] as number[],
+    editedUsers: {} as Record<number, UserDraft>,
 }
 
 export const useUserStore = create<UserStore>()(
     persist(
         (set) => ({
-            archived: [],
-            hidden: [],
-            editedUsers: {},
+            ...INITIAL_USER_STATE,
 
             archiveUser: (id) =>
                 set((state) => ({
@@ -41,6 +46,11 @@ export const useUserStore = create<UserStore>()(
                         [id]: data,
                     },
                 })),
+
+            resetState: () =>
+                set({
+                    ...INITIAL_USER_STATE,
+                }),
         }),
         {
             name: 'test-at-work-user-store',
@@ -61,3 +71,4 @@ export const useArchiveUser = () => useUserStore((state) => state.archiveUser)
 export const useUnarchiveUser = () => useUserStore((state) => state.unarchiveUser)
 export const useHideUser = () => useUserStore((state) => state.hideUser)
 export const useSaveUser = () => useUserStore((state) => state.saveUser)
+export const useResetUserState = () => useUserStore((state) => state.resetState)

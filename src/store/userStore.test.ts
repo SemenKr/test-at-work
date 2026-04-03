@@ -56,4 +56,26 @@ describe('userStore', () => {
     expect(persisted).toContain('"phone":"1-770-736-8031 x56442"')
     expect(persisted).not.toContain('archiveUser')
   })
+
+  it('resets archived, hidden and edited users state', () => {
+    const { archiveUser, hideUser, saveUser, resetState } = useUserStore.getState()
+
+    archiveUser(2)
+    hideUser(3)
+    saveUser(4, {
+      name: 'Reset Me',
+      username: 'reset',
+      email: 'reset@example.com',
+      city: 'Rome',
+      phone: '+39 123 456',
+      company: 'Reset Inc',
+      avatar: 'https://example.com/reset.png',
+    })
+
+    resetState()
+
+    expect(useUserStore.getState().archived).toEqual([])
+    expect(useUserStore.getState().hidden).toEqual([])
+    expect(useUserStore.getState().editedUsers).toEqual({})
+  })
 })

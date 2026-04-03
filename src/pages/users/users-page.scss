@@ -16,11 +16,41 @@
   margin-top: 40px;
 }
 
-.users-page__section-title {
+.users-page__section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   margin-bottom: 16px;
+}
+
+.users-page__section-title {
   font-size: 20px;
   font-weight: 600;
   line-height: 1.2;
+}
+
+.users-page__reset {
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid $border;
+  border-radius: 999px;
+  background: transparent;
+  color: $text-secondary;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.users-page__reset:hover {
+  border-color: rgba(42, 144, 188, 0.3);
+  color: $accent;
+}
+
+.users-page__reset:focus-visible {
+  outline: 2px solid rgba(42, 144, 188, 0.35);
+  outline-offset: 2px;
 }
 
 .users-page__divider {
@@ -135,8 +165,19 @@
   }
 
   .users-page__section-title {
-    margin-bottom: 12px;
     font-size: 18px;
+  }
+
+  .users-page__section-header {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 12px;
+  }
+
+  .users-page__reset {
+    min-height: 34px;
+    padding: 0 12px;
+    font-size: 12px;
   }
 
   .users-page__divider {

@@ -1,6 +1,11 @@
 import { useUsers } from '@/shared/api/users'
 import { applyUserDraft, getArchivedUsers, getVisibleActiveUsers } from '@/entities/user/utils'
-import { useArchivedUserIds, useEditedUsers, useHiddenUserIds } from '@/store/userStore'
+import {
+    useArchivedUserIds,
+    useEditedUsers,
+    useHiddenUserIds,
+    useResetUserState,
+} from '@/store/userStore'
 import { UserCard } from '@/features/user-card/UserCard'
 import { useState } from 'react'
 import { Loader } from '@/shared/ui'
@@ -11,7 +16,9 @@ export const UsersPage = () => {
     const archived = useArchivedUserIds()
     const hidden = useHiddenUserIds()
     const editedUsers = useEditedUsers()
+    const resetUserState = useResetUserState()
     const [openMenuUserId, setOpenMenuUserId] = useState<number | null>(null)
+    const hasCustomState = archived.length > 0 || hidden.length > 0 || Object.keys(editedUsers).length > 0
 
     if (isLoading) return <Loader variant="users" />
     if (isError) {
@@ -45,9 +52,23 @@ export const UsersPage = () => {
         <section className="users-page">
             <div className="users-page__container">
                 <section className="users-page__section" aria-labelledby="active-users-title">
-                    <h1 className="users-page__section-title" id="active-users-title">
-                        Активные
-                    </h1>
+                    <div className="users-page__section-header">
+                        <h1 className="users-page__section-title" id="active-users-title">
+                            Активные
+                        </h1>
+                        {hasCustomState && (
+                            <button
+                                className="users-page__reset"
+                                type="button"
+                                onClick={() => {
+                                    setOpenMenuUserId(null)
+                                    resetUserState()
+                                }}
+                            >
+                                Сбросить состояние
+                            </button>
+                        )}
+                    </div>
                     <div className="users-page__divider" />
 
                     {activeUsers.length ? (
