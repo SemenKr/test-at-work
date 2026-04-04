@@ -1,4 +1,3 @@
-// src/shared/ui/Dropdown.tsx
 import { type ReactNode, type RefObject, useEffect, useRef } from 'react'
 import './dropdown.scss'
 
