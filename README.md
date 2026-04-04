@@ -4,7 +4,7 @@ Frontend test assignment implemented with `React`, `TypeScript`, `Vite`, `React 
 
 ## Demo
 
-- Production: https://test-at-work-awwihatqz-semenkrs-projects.vercel.app/
+- Production: https://test-at-work-kijo1qgr0-semenkrs-projects.vercel.app/
 - Repository: https://github.com/SemenKr/test-at-work
 
 ## Implemented
